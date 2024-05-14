@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Twig\Environment;
 use App\Entity\Conference;
 use App\Repository\CommentRepository;
 use App\Repository\ConferenceRepository;
