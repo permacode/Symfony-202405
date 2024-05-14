@@ -6,9 +6,10 @@ use App\Repository\ConferenceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Stringable;
 
 #[ORM\Entity(repositoryClass: ConferenceRepository::class)]
-class Conference
+class Conference implements Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -104,5 +105,10 @@ class Conference
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->city . ' ' . $this->year;
     }
 }
