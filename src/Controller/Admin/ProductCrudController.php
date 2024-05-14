@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\Product;
 use Doctrine\DBAL\Types\FloatType;
 use Doctrine\DBAL\Types\TextType;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -43,7 +45,7 @@ class ProductCrudController extends AbstractCrudController
         yield TextField::new('name');
         yield MoneyField::new('price')->setCurrency('EUR');
         yield TextareaField::new('description')
-        ->hideOnIndex();
+            ->hideOnIndex();
     }
 
     public function configureFilters(Filters $filters): Filters
@@ -53,6 +55,13 @@ class ProductCrudController extends AbstractCrudController
             ->add('price')
             ->add('name')
             // ->remove('description')
+        ;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+       return parent::configureActions($actions) 
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
         ;
     }
 }
