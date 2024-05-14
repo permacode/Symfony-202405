@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -40,8 +41,9 @@ class ProductCrudController extends AbstractCrudController
         // ];
         yield AssociationField::new('category');
         yield TextField::new('name');
-        yield NumberField::new('price');
-        yield TextareaField::new('description');
+        yield MoneyField::new('price')->setCurrency('EUR');
+        yield TextareaField::new('description')
+        ->hideOnIndex();
     }
 
     public function configureFilters(Filters $filters): Filters
