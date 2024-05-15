@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\BrowserKit\Request;
@@ -41,14 +42,16 @@ class ProductController extends AbstractController
             'category' => 'laptop',
         ]
     ];
-    #[Route('/products', name: 'app_product')]
-    public function displayAllProducts(): JsonResponse
+    #[Route('/products', name: 'products')]
+    public function displayAllProducts(ProductRepository $repo): Response
     {
-        return $this->json(self::$products);
+        return $this->render('product/index.html.twig', [
+            'products' => $repo->findAll(),
+        ]);
     }
 
-    #[Route('/product/{id}', name: "product_by_id")]
-    public function displayProductById(int $id): JsonResponse
+    #[Route('/product/{id}', name: "product")]
+    public function displayProductById(int $id, ProductRepository $repo): Response
     {
         // $returnedProduct = [];
         // if (!!$id) {
@@ -62,9 +65,14 @@ class ProductController extends AbstractController
         // } else {
         //     return $this->json("Cette option  n'est pas disponible.");
         // }
-        return $this->json(array_filter(self::$products, fn ($product): bool => $id === $product['id']));
-        $data = (new ArrayCollection(self::$products))
-            ->findFirst(fn(int $key, array $product):bool =>
-                $id === $product['id']);
+        // return $this->json(array_filter(self::$products, fn ($product): bool => $id === $product['id']));
+        // $data = (new ArrayCollection(self::$products))
+        //     ->findFirst(fn (int $key, array $product): bool =>
+        //     $id === $product['id']);
+
+        $product = $repo->findById($id);
+        return $this->render('product/index.html.twig', [
+            'products' => $product
+        ]);
     }
 }

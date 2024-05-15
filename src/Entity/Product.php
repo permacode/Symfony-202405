@@ -5,9 +5,10 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Stringable;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-class Product
+class Product implements Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -85,5 +86,10 @@ class Product
         $this->category = $category;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }

@@ -1,20 +1,67 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}
+	Hello ProductController!
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<style>
+		.example-wrapper
+		{
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code
+		{
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<div class="example-wrapper">
+		<table class="table table-striped">
+			<thead>
+				<th scope="col">
+					Product
+				</th>
+				<th scope="col">
+					Category
+				</th>
+				<th scope="col">
+					Price
+				</th>
+				<th scope="col">
+					Description
+				</th>
+			</thead>
+			<tbody>
+				{% for product in products %}
+					<tr>
+						<td>
+							{% if products|length > 1 %}
+								<a href="{{ path('product', {id: product.id}) }}">
+								{% endif %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/workspace/Symfony-202405/src/Controller/ProductController.php</code></li>
-        <li>Your template at <code>/workspace/Symfony-202405/templates/product/index.html.twig</code></li>
-    </ul>
-</div>
+								{{product}}
+								{% if products|length > 1 %}
+								</a>
+							{% endif %}
+						</td>
+						<td>
+							{{product.category}}
+						</td>
+						<td>
+							{{product.price}}
+						</td>
+						<td>
+							{{product.description}}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</div>
 {% endblock %}
