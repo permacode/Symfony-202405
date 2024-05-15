@@ -67,10 +67,12 @@
 			<a href="{{ path('products') }}">
 				Back to list
 			</a>
+		{% else %}
+			<div class="navigation">
+				{{ knp_pagination_render(products) }}
+			</div>
 		{% endif %}
+
 	</div>
 
-	<div class="navigation">
-		{{ knp_pagination_render(products) }}
-	</div>
 {% endblock %}
