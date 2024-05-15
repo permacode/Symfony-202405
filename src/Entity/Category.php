@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Stringable;
@@ -9,6 +11,9 @@ use Stringable;
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category implements Stringable
 {
+    use CreatedAtTrait;
+    use UpdatedAtTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -16,7 +21,6 @@ class Category implements Stringable
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
-
 
     public function getId(): ?int
     {
