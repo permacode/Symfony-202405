@@ -30,26 +30,57 @@ class CommentFormType extends AbstractType
                     'class' => 'form-label'
                 ],
                 'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Your name here'
+                ]
+            ])
+            ->add('text', TextareaType::class, [
+                'label' => 'Your comment',
+                'row_attr' => [
+                    'class' => 'mb-3'
+                ],
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+                'attr' => [
                     'class' => 'form-control'
                 ]
             ])
-            ->add('text', TextareaType::class)
-            ->add('email', EmailType::class)
-            ->add('createdAt', DateTimeType::class, [
-                'widget' => 'single_text',
+            ->add('email', EmailType::class, [
+                'label' => 'Your email',
+                'row_attr' => [
+                    'class' => 'mb-3'
+                ],
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'name.firstname@example.com'
+                ]
             ])
             ->add('photo', FileType::class, [
                 'required' => false,
                 'mapped' => false,
-                'attr' => [
-                    'class' => 'test_photo'
+                'row_attr' => [
+                    'class' => 'mb-3'
                 ],
+                'attr' => [
+                    'class' => 'form-control form-control-sm',
+                    'type' => 'file'
+                ],
+                'label' => 'Photo',
                 'constraints' => [
                     new Image(['maxSize' => '1024k'])
                 ],
             ])
-            ->add('submit', SubmitType::class);
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => "btn btn-primary"
+                ]
+            ]);
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {

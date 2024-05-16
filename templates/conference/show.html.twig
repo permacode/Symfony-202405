@@ -43,7 +43,14 @@
 			No comments have been posted yet for this conference.
 		</div>
 	{% endif %}
-    <h2>Add your own feedback</h2>
-
-    {{ form(comment_form) }}
+	<div class="w-50 mx-auto">
+		{{ form_start(comment_form) }}
+		<fieldset>
+			<legend>
+				Add your own feedback
+			</legend>
+			{{ form_widget(comment_form) }}
+		</fieldset>
+		{{ form_end(comment_form) }}
+	</div>
 {% endblock %}
