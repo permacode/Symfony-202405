@@ -33,7 +33,7 @@ class ConferenceController extends AbstractController
     EOF);
     }
 
-    #[Route('/conference', name: 'app_conference')]
+    #[Route('/conference', name: 'conferences')]
     public function list(ConferenceRepository $repo): Response
     {
         return $this->render('conference/index.html.twig', [
