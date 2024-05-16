@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Stringable;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -128,5 +129,10 @@ class Comment implements Stringable
     public function __toString(): string
     {
         return (string) $this->getEmail();
+    }
+
+    public static function setFilename(UploadedFile $photo): string
+    {
+        return bin2hex(random_bytes(6)) . '.' . $photo->guessExtension();
     }
 }

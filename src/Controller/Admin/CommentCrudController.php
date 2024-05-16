@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
 class CommentCrudController extends AbstractCrudController
@@ -50,6 +51,9 @@ class CommentCrudController extends AbstractCrudController
         yield ImageField::new('photoFilename')
             ->setBasePath('/uploads/photos')
             ->setUploadDir('public/uploads/photos')
+            ->setUploadedFileNamePattern(
+                fn (UploadedFile $photo) => Comment::setFilename($photo)
+            )
             ->setLabel('Photo')
             // ->onlyOnIndex()
         ;
