@@ -15,6 +15,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,9 +42,9 @@ class CommentCrudController extends AbstractCrudController
             ->add(EntityFilter::new('conference'));
     }
 
-    public function configureFields(string $pageName): iterable
-    {
-        // TODO: Ask the question "Why not on repositories" ?
+    public function configureFields(
+        string $pageName,
+    ): iterable {
         yield AssociationField::new('conference');
         yield TextField::new('author');
         yield EmailField::new('email');
