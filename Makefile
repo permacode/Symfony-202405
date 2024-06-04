@@ -28,4 +28,10 @@ quality:
 	make phpstan
 	make tests
 
+make-migration:
+	symfony console make:migration --formatted
+
+migrate:
+	symfony console doctrine:migrations:migrate -n
+
 .PHONY: tests

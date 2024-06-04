@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use App\Entity\Enum\CommentStateEnum;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -45,6 +46,9 @@ class Comment implements \Stringable
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoFilename = null;
+
+    #[ORM\Column(length: 255, options: ['default' => CommentStateEnum::Published])]
+    private ?CommentStateEnum $state = CommentStateEnum::Published;
 
     public function getId(): ?int
     {
@@ -130,6 +134,18 @@ class Comment implements \Stringable
 
     public static function setFilename(UploadedFile $photo): string
     {
-        return bin2hex(random_bytes(6)).'.'.$photo->guessExtension();
+        return bin2hex(random_bytes(6)) . '.' . $photo->guessExtension();
+    }
+
+    public function getState(): CommentStateEnum
+    {
+        return $this->state;
+    }
+
+    public function setState(CommentStateEnum $state): static
+    {
+        $this->state = $state;
+
+        return $this;
     }
 }
