@@ -1,0 +1,1 @@
+{"version":1,"defects":[],"times":{"App\\Tests\\SpamCheckerTest::testSpamScoreWithInvalidRequest":0.004,"App\\Tests\\SpamCheckerTest::testSpamScore#blatant_spam":0,"App\\Tests\\SpamCheckerTest::testSpamScore#spam":0,"App\\Tests\\SpamCheckerTest::testSpamScore#ham":0}}
