@@ -15,6 +15,7 @@ class AppFixtures extends Fixture
         private PasswordHasherFactoryInterface $passwordHasherFactory,
     ) {
     }
+
     public function load(ObjectManager $manager): void
     {
         $amsterdam = new Conference();

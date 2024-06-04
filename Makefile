@@ -14,4 +14,18 @@ up:
 down:
 	symfony server:stop
 
+phpstan:
+	APP_ENV=dev symfony php vendor/bin/phpstan analyse --level max
+
+phpcs fix:
+	APP_ENV=dev symfony php vendor/bin/php-cs-fixer fix
+
+phpcs cry-run:
+	APP_ENV=dev symfony php vendor/bin/php-cs-fixer fix --dry-run
+
+quality:
+	make php-cs-fixer
+	make phpstan
+	make tests
+
 .PHONY: tests

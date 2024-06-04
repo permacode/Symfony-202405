@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Repository\ProductRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -25,11 +23,11 @@ class ProductController extends AbstractController
 
         return $this->render('product/index.html.twig', [
             'products' => $pagination,
-            'title' => 'List of products'
+            'title' => 'List of products',
         ]);
     }
 
-    #[Route('/product/{id}', name: "product")]
+    #[Route('/product/{id}', name: 'product')]
     public function displayProductById(Product $product, PaginatorInterface $paginator, Request $request): Response
     {
         $pagination = $paginator->paginate(
@@ -37,9 +35,10 @@ class ProductController extends AbstractController
             $request->query->getInt('page', 1),
             3
         );
+
         return $this->render('product/index.html.twig', [
             'products' => $pagination,
-            'title' => 'One product'
+            'title' => 'One product',
         ]);
     }
 }

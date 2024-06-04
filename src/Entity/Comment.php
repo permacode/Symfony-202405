@@ -3,17 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
-use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Stringable;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Comment implements Stringable
+class Comment implements \Stringable
 {
     #[ORM\PrePersist]
     public function setCreatedAtValue()
@@ -133,6 +130,6 @@ class Comment implements Stringable
 
     public static function setFilename(UploadedFile $photo): string
     {
-        return bin2hex(random_bytes(6)) . '.' . $photo->guessExtension();
+        return bin2hex(random_bytes(6)).'.'.$photo->guessExtension();
     }
 }

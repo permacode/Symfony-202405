@@ -9,16 +9,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Response;
 
 class CommentCrudController extends AbstractCrudController
 {
@@ -62,7 +57,7 @@ class CommentCrudController extends AbstractCrudController
         $createdAt = DateTimeField::new('createdAt')
             ->setFormTypeOptions([
                 'html5' => true,
-                'years' => range(date('Y'), date('Y') +  5),
+                'years' => range(date('Y'), date('Y') + 5),
                 'widget' => 'single_text',
             ]);
         yield $createdAt->hideOnForm();

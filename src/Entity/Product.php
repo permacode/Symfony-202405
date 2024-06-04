@@ -7,13 +7,11 @@ use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Stringable;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-class Product implements Stringable
+class Product implements \Stringable
 {
-
     use CreatedAtTrait;
     use UpdatedAtTrait;
 

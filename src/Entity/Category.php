@@ -6,10 +6,9 @@ use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Stringable;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-class Category implements Stringable
+class Category implements \Stringable
 {
     use CreatedAtTrait;
     use UpdatedAtTrait;

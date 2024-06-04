@@ -2,7 +2,6 @@
 
 namespace App\EventSubscriber;
 
-use App\Controller\Admin\DashboardController;
 use App\Repository\ConferenceRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;

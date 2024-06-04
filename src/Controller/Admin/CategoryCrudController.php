@@ -10,7 +10,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Symfony\Polyfill\Intl\Icu\DateFormat\YearTransformer;
 
 class CategoryCrudController extends AbstractCrudController
 {
@@ -22,8 +21,8 @@ class CategoryCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular("Category")
-            ->setEntityLabelInPlural("Categories");
+            ->setEntityLabelInSingular('Category')
+            ->setEntityLabelInPlural('Categories');
     }
 
     public function configureFields(string $pageName): iterable
@@ -43,6 +42,6 @@ class CategoryCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
-            ->add('name');;
+            ->add('name');
     }
 }

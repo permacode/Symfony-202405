@@ -5,17 +5,13 @@ namespace App\Entity;
 use App\Repository\ConferenceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\PrePersist;
-use Stringable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: ConferenceRepository::class)]
 #[UniqueEntity('slug')]
-class Conference implements Stringable
+class Conference implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -125,7 +121,7 @@ class Conference implements Stringable
 
     public function __toString(): string
     {
-        return $this->city . ' ' . $this->year;
+        return $this->city.' '.$this->year;
     }
 
     public function getSlug(): ?string

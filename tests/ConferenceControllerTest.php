@@ -14,7 +14,7 @@ class ConferenceControllerTest extends WebTestCase
         static::assertResponseIsSuccessful();
         static::assertSelectorTextContains('h2', 'Give your feedback!');
     }
-    
+
     public function testCommentSubmission(): void
     {
         $client = static::createClient();
@@ -23,7 +23,7 @@ class ConferenceControllerTest extends WebTestCase
             'comment_form[author]' => 'Fabien',
             'comment_form[text]' => 'Some feedback from an automated functional test',
             'comment_form[email]' => 'me@automat.ed',
-            'comment_form[photo]' => dirname(__DIR__, 2) . '/public/images/under-construction.gif',
+            'comment_form[photo]' => dirname(__DIR__, 2).'/public/images/under-construction.gif',
         ]);
         static::assertResponseRedirects();
         $client->followRedirect();

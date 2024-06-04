@@ -3,11 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Comment;
-use App\Entity\Conference;
-use DOMElement;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -24,63 +20,62 @@ class CommentFormType extends AbstractType
             ->add('author', null, [
                 'label' => 'Your name',
                 'row_attr' => [
-                    'class' => 'mb-3'
+                    'class' => 'mb-3',
                 ],
                 'label_attr' => [
-                    'class' => 'form-label'
+                    'class' => 'form-label',
                 ],
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Your name here'
-                ]
+                    'placeholder' => 'Your name here',
+                ],
             ])
             ->add('text', TextareaType::class, [
                 'label' => 'Your comment',
                 'row_attr' => [
-                    'class' => 'mb-3'
+                    'class' => 'mb-3',
                 ],
                 'label_attr' => [
-                    'class' => 'form-label'
+                    'class' => 'form-label',
                 ],
                 'attr' => [
-                    'class' => 'form-control'
-                ]
+                    'class' => 'form-control',
+                ],
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Your email',
                 'row_attr' => [
-                    'class' => 'mb-3'
+                    'class' => 'mb-3',
                 ],
                 'label_attr' => [
-                    'class' => 'form-label'
+                    'class' => 'form-label',
                 ],
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'name.firstname@example.com'
-                ]
+                    'placeholder' => 'name.firstname@example.com',
+                ],
             ])
             ->add('photo', FileType::class, [
                 'required' => false,
                 'mapped' => false,
                 'row_attr' => [
-                    'class' => 'mb-3'
+                    'class' => 'mb-3',
                 ],
                 'attr' => [
                     'class' => 'form-control form-control-sm',
-                    'type' => 'file'
+                    'type' => 'file',
                 ],
                 'label' => 'Photo',
                 'constraints' => [
-                    new Image(['maxSize' => '1024k'])
+                    new Image(['maxSize' => '1024k']),
                 ],
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => "btn btn-primary"
-                ]
+                    'class' => 'btn btn-primary',
+                ],
             ]);
     }
-
 
     public function configureOptions(OptionsResolver $resolver): void
     {
