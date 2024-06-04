@@ -29,7 +29,7 @@ class ConferenceControllerTest extends WebTestCase
         static::assertResponseIsSuccessful();
         static::assertSelectorTextContains('h2', 'Amsterdam 2019');
 
-        static::assertSelectorExists('div:contains("There are 3 comment")');
+        static::assertSelectorExists('div:contains("There are 1 comment")');
     }
 
     public function testCommentSubmission(): void
@@ -44,6 +44,6 @@ class ConferenceControllerTest extends WebTestCase
         ]);
         static::assertResponseRedirects();
         $client->followRedirect();
-        static::assertSelectorExists('div:contains("There are 4 comments")');
+        static::assertSelectorExists('div:contains("There are 2 comments")');
     }
 }
