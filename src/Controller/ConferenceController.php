@@ -5,16 +5,16 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Conference;
 use App\Form\CommentFormType;
+use App\Message\CommentMessage;
 use App\Repository\CommentRepository;
 use App\Repository\ConferenceRepository;
-use App\SpamChecker;
 use Doctrine\ORM\EntityManagerInterface;
-use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class ConferenceController extends AbstractController
@@ -48,7 +48,7 @@ class ConferenceController extends AbstractController
         Request $request,
         Conference $conference,
         CommentRepository $commentRepository,
-        SpamChecker $checker,
+        MessageBusInterface $bus,
         #[Autowire('%photo_dir%')] string $photoDir, // Get the path "photo_dir" from services.yaml
         // Could work with this and line below: // ContainerInterface $container
     ): Response {
@@ -71,6 +71,7 @@ class ConferenceController extends AbstractController
             }
 
             $this->entityManager->persist($comment);
+            $this->entityManager->flush();
 
             $context = [
                 'user_ip' => $request->getClientIp(),
@@ -79,10 +80,7 @@ class ConferenceController extends AbstractController
                 'permaLink' => $request->getUri()
             ];
 
-            if ($checker->getSpamScore($comment, $context) === 2) {
-                throw new RuntimeException("Blatant spam, go away !");
-            }
-            $this->entityManager->flush();
+            $bus->dispatch(new CommentMessage($comment->getId()), $context);
 
             return $this->redirectToRoute('conference', ['slug' => $conference->getSlug()]);
         }
