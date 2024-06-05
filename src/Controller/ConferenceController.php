@@ -51,9 +51,7 @@ class ConferenceController extends AbstractController
         CommentRepository $commentRepository,
         MessageBusInterface $bus,
         #[Autowire('%photo_dir%')] string $photoDir, // Get the path "photo_dir" from services.yaml
-        // Could work with this and line below: // ContainerInterface $container
     ): Response {
-        // $photoDir = $container->getParameter("photo_dir");
         $comment = new Comment();
         $form = $this->createForm(CommentFormType::class, $comment);
 

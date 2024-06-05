@@ -47,8 +47,8 @@ class Comment implements \Stringable
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoFilename = null;
 
-    #[ORM\Column(length: 255, options: ['default' => CommentStateEnum::Published])]
-    private ?CommentStateEnum $state = CommentStateEnum::Published;
+    #[ORM\Column(length: 255, options: ['default' => CommentStateEnum::Submitted])]
+    private ?CommentStateEnum $state = CommentStateEnum::Submitted;
 
     public function getId(): ?int
     {
