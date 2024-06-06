@@ -10,7 +10,7 @@ services:
 ###> symfony/mailer ###
   mailer:
     image: axllent/mailpit
-    ports:
+    ports: # can be seen with CLI : docker compose ps
       - "1025"
       - "8025"
     environment:
